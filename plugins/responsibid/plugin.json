@@ -1,0 +1,17 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "responsibid",
+  "version": "0.2.0",
+  "description": "Build, price and book ResponsiBid quotes.",
+  "author": { "name": "Symphosize" },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "ResponsiBid",
+        "shortDescription": "Build, price and book ResponsiBid quotes.",
+        "developerName": "Symphosize",
+        "category": "Productivity"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "responsibid",
+  "owner": {
+    "name": "Symphosize"
+  },
+  "metadata": {
+    "description": "ResponsiBid quote, follow-up and pricing-setup plugins."
+  },
+  "plugins": [
+    {
+      "name": "responsibid",
+      "source": "./plugins/responsibid",
+      "description": "Build, price and book ResponsiBid quotes."
+    },
+    {
+      "name": "responsibid-coach",
+      "source": "./plugins/responsibid-coach",
+      "description": "For support staff and coaches: company onboarding setup - pricing and follow-up sequences."
+    }
+  ]
+}
