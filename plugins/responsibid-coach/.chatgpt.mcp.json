@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "responsibid": {
+      "type": "streamable-http",
+      "url": "https://api-connect.bids.responsibid.com/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "provided",
+              "clientId": "chatgpt-v2",
+              "tokenEndpointAuthMethod": "client_secret_basic"
+            }
+          }
+        }
+      }
+    }
+  }
+}

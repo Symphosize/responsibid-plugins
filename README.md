@@ -53,7 +53,15 @@ To test local changes, add a local checkout instead of the GitHub repo:
 
 ### Codex
 
-Open this repo in Codex. It reads `.agents/plugins/marketplace.json`. Install `responsibid` or `responsibid-coach` from the plugin browser, then sign in to ResponsiBid when prompted.
+Open this repo in Codex. It reads `.agents/plugins/marketplace.json`. Install `responsibid` or `responsibid-coach` from the plugin browser, then sign in to ResponsiBid when prompted. You can also install a plugin from its `codex-*.zip` on the [Releases](https://github.com/Symphosize/responsibid-plugins/releases) page.
+
+Codex signs in with the `codex` client and returns to `http://127.0.0.1:29353/callback/v9Www2EoKsOh`, so keep port 29353 free during login. The last part of that path is derived from the server URL, so a different server needs its own registered callback. To use one, add the server by hand with `codex mcp add` instead of using the plugin.
+
+### ChatGPT
+
+A workspace admin uploads `chatgpt-responsibid.zip` (and `chatgpt-responsibid-coach.zip` for coaches) from the [Releases](https://github.com/Symphosize/responsibid-plugins/releases) page in the ChatGPT admin console, under **Plugins → Add → Upload plugin**. The zip includes the skills and the MCP server, already set up for the `chatgpt-v2` OAuth client. When ChatGPT asks for the **OAuth Client Secret** under **MCPs → Connect**, enter it from the team's password manager. The secret is never in the zip or this repo.
+
+A plugin uploaded in ChatGPT also syncs to the Codex app, and current Codex versions drop its server because of the OpenAI auth block ([openai/codex#53658](https://github.com/openai/codex/issues/53658)). In Codex, install the Codex plugin instead.
 
 ### claude.ai
 
@@ -66,12 +74,7 @@ Connector:
 3. Under **OAuth client**, choose **Use your own OAuth client** and enter the client ID `ec0efc64-4415-4758-b912-4f7cede1b9c1`. Leave the secret empty.
 4. Save and sign in. ResponsiBid returns you to `https://claude.ai/api/mcp/auth_callback`. You can't change auth settings after adding the connector; remove it and add it again instead.
 
-Skills: zip each skill folder, then upload each zip in **Customize → Skills → + → Create skill → Upload a skill**.
-
-```
-cd plugins/responsibid/skills && zip -r ~/quote-intake.zip quote-intake
-cd plugins/responsibid-coach/skills && for s in */; do zip -r ~/"${s%/}".zip "$s"; done
-```
+Skills: download each `claude-skill-*.zip` from the [Releases](https://github.com/Symphosize/responsibid-plugins/releases) page and upload it in **Customize → Skills → + → Create skill → Upload a skill**.
 
 Uploaded skills are private to your account. Team and Enterprise owners can share them with the organization.
 
@@ -80,29 +83,36 @@ Uploaded skills are private to your account. Team and Enterprise owners can shar
 | | Value |
 |---|---|
 | URL | `https://api-connect.bids.responsibid.com/mcp` (production, the default). Override it with `RESPONSIBID_MCP_URL`. |
-| OAuth client ID | `ec0efc64-4415-4758-b912-4f7cede1b9c1` |
-| Allowed redirect URIs | `https://claude.ai/api/mcp/auth_callback` (claude.ai), `http://localhost:8976/callback` (Claude Code) |
+| OAuth clients | Claude and claude.ai: `ec0efc64-4415-4758-b912-4f7cede1b9c1`. Codex: `codex`. ChatGPT: `chatgpt-v2`, whose secret is entered in ChatGPT and never committed. |
+| Allowed redirect URIs | `https://claude.ai/api/mcp/auth_callback` (claude.ai), `http://localhost:8976/callback` (Claude Code), `http://127.0.0.1:29353/callback/v9Www2EoKsOh` (Codex), `https://chatgpt.com/connector/oauth/Cg9ws4-JyVGV` (ChatGPT) |
 
-The Claude Code config is in `plugins/responsibid/.mcp.json`, the only plugin that declares the server.
+The Claude Code config is in `plugins/responsibid/.mcp.json`; in Claude Code, only that plugin declares the server. The Codex config is in `plugins/*/.codex.mcp.json`, and the ChatGPT config is in `plugins/*/.chatgpt.mcp.json`.
 
 ## Layout
 
-Each plugin carries both clients' files. Keep them in sync when you change one.
+Each plugin carries both Claude's and Codex's files. Keep them in sync when you change one.
 
 | File | Read by |
 |---|---|
 | `.claude-plugin/marketplace.json` | Claude Code |
 | `.agents/plugins/marketplace.json` | Codex |
 | `plugins/*/.claude-plugin/plugin.json` | Claude Code |
-| `plugins/*/plugin.json` | Codex / ChatGPT |
+| `plugins/*/.codex-plugin/plugin.json` | Codex |
 | `plugins/responsibid/.mcp.json` | Claude Code (`type: http`, with `oauth`) |
-| `plugins/*/mcp.json` | Codex / ChatGPT (`type: streamable-http`) |
-| `plugins/*/skills/*/SKILL.md` | Both |
+| `plugins/*/.codex.mcp.json` | Codex (`type: http`, with the `codex` OAuth client) |
+| `plugins/*/.chatgpt.mcp.json` | ChatGPT (becomes `mcp.json` in the ChatGPT zip; `plugin.json` is built from the Codex manifest) |
+| `plugins/*/assets/` | Codex and ChatGPT icons |
+| `plugins/*/skills/*/SKILL.md` | Claude, Codex and ChatGPT |
+| `scripts/package.sh` | The release workflow, which builds the zips |
 | `plugins/*/evals/` | `claude plugin eval` |
 
 Write skills in neutral wording ("the assistant", not a product name). Codex and ChatGPT drop Claude-only features such as hooks. Skills should match the tool descriptions in the server's `apps/connect/src/app/mcp/tools`; when a tool changes, update the skill that uses it.
 
 Bump `version` in both of a plugin's `plugin.json` files whenever you change it. Installed copies don't update until the version changes.
+
+## Release
+
+See [RELEASE.md](RELEASE.md).
 
 ## Evals
 

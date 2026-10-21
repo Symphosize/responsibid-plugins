@@ -1,0 +1,24 @@
+{
+  "name": "responsibid",
+  "version": "0.2.0",
+  "description": "Create and price home-service quotes in ResponsiBid. Browse a company's service catalog, look up or add contacts by phone, build bids with property and service details, calculate pricing, and review or select proposal packages. You can also view and edit follow-up sequences and their steps.",
+  "author": {
+    "name": "Symphosize"
+  },
+  "mcpServers": "./.codex.mcp.json",
+  "interface": {
+    "displayName": "ResponsiBid",
+    "shortDescription": "Home-service quotes & pricing",
+    "developerName": "Symphosize",
+    "category": "Productivity",
+    "logo": "./assets/icon.png",
+    "composerIcon": "./assets/icon.png",
+    "logoDark": "./assets/icon.png",
+    "composerIconDark": "./assets/icon.png",
+    "brandColor": "#0073FF",
+    "brandColorDark": "#0073FF",
+    "websiteURL": "https://responsibid.com/",
+    "longDescription": "Create and price home-service quotes in ResponsiBid. Browse a company's service catalog, look up or add contacts by phone, build bids with property and service details, calculate pricing, and review or select proposal packages. You can also view and edit follow-up sequences and their steps."
+  },
+  "homepage": "https://responsibid.com/"
+}
