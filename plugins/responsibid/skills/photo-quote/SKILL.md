@@ -90,7 +90,8 @@ Call `get_proposal`, then reply with:
 - One table: service by package by price. Show a bid-in-person service as "Bid in person", never as $0.
 - One line naming any service the account attached on its own. A company's auto-added services can join a new quote; don't present them as the user's choice.
 - One line on when the follow-up's first email and text go out.
-- One line offering the customer page, built with the `customer-quote-page` skill only if the user asks.
+
+Then offer the customer page as one tap: "Build the customer quote page?" with "Build the page" and "Not now". Use a menu where the client offers one; otherwise a numbered list. Build it with the `customer-quote-page` skill only on "Build the page". It's optional, so the quote is already done either way.
 
 `pricingStatus: "queued"` in the `create_bid` reply is a fixed word, not a live status.
 
