@@ -4,8 +4,10 @@ Plugin marketplace for Claude Code and Codex. It connects the assistant to the R
 
 | Plugin | For | Skills |
 |---|---|---|
-| `responsibid` | Everyone | `quote-intake` |
+| `responsibid` | Everyone | `quote-intake`, `photo-quote`, `customer-quote-page` |
 | `responsibid-coach` | Support and coaches, for company onboarding | `company-onboarding`, `pricing-setup`, `follow-up-rewrite` |
+
+`photo-quote` and `customer-quote-page` build on `quote-intake`, so install the three together. On claude.ai, upload all three skill zips. `photo-quote` only reads the company's follow-up sequence, to list what saving a quote will send. If a login can't read follow-ups, it says so and asks before it saves.
 
 `responsibid` provides the ResponsiBid MCP server. `responsibid-coach` depends on it, so installing the coach plugin also installs `responsibid`, and both share one server and one sign-in. The server lists only the tools your login's scopes allow, so the pricing-setup tools appear only for coach accounts. Follow-up sequences and pricing are company-wide settings, so their skills live in the coach plugin.
 
@@ -14,6 +16,8 @@ Plugin marketplace for Claude Code and Codex. It connects the assistant to the R
 | Skill | Use it to | MCP tools |
 |---|---|---|
 | `quote-intake` | Find the service, find or create the customer, price a quote, record their package or bundle, sign, and book an appointment. Also answers questions about existing quotes. | `get_catalog`, `find_contact_by_phone`, `create_contact`, `compute_pricing`, `create_bid`, `get_proposal`, `select_proposal_package`, `select_proposal_bundle`, `confirm_signature`, `request_scheduling_slots`, `confirm_appointment`, `list_bids`, `get_bid` |
+| `photo-quote` | Build a quote from photos of a property: count what the photos show, ask the rest as quick choices, offer upsells, price-check, list the emails, texts and webhooks that saving will set off, and save only after the user approves. | `get_catalog`, `find_contact_by_phone`, `compute_pricing`, `list_follow_up_sequences`, `get_follow_up_sequence`, `create_bid`, `get_proposal`, `get_bid` |
+| `customer-quote-page` | Build a one-file page for a saved quote: what the photos showed, packages with a running total, upsells, the customer's proposal link, links into ResponsiBid for staff, and a company-only "How this quote was built" section. | `get_proposal`, `get_bid` |
 | `company-onboarding` | Take a newly signed company through setup in order: house sizes, prices, packages, bundles, then follow-ups | Uses the two skills below |
 | `pricing-setup` | Change house sizes, house-size prices, option prices, packages, and bundle auto-add. Every write is previewed and needs the user's approval. | `get_catalog`, `get_service_pricing`, `manage_house_sizes`, `set_house_size_prices`, `set_option_price`, `set_packages`, `set_bundle_auto_add`, `compute_pricing` |
 | `follow-up-rewrite` | Review and rewrite the automated emails and texts sent after a quote or job | `list_follow_up_sequences`, `get_follow_up_sequence`, `list_follow_up_steps`, `update_follow_up_step` |
