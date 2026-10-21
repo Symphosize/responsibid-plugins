@@ -11,7 +11,7 @@
             "client": {
               "mode": "provided",
               "clientId": "chatgpt-v2",
-              "tokenEndpointAuthMethod": "client_secret_basic"
+              "tokenEndpointAuthMethod": "client_secret_post"
             }
           }
         }
