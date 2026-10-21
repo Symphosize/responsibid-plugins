@@ -61,7 +61,7 @@ If `create_bid` fails with "This submission has been blocked by the company", no
 
 ### 7. Read back
 
-Call `get_proposal`. Compare every package price to the price check and report the differences in one table. Report any service or bundle on the quote that the user didn't choose, and don't present it as their choice; a company's bundle auto-add can attach them. `pricingStatus: "queued"` in the `create_bid` reply is a fixed word, not a live status.
+Call `get_proposal`. Compare every package price to the price check and report the differences in one table. Report any service on the quote that the user didn't choose, and don't present it as their choice; a company's bundle auto-add can attach services to a new quote. `pricingStatus: "queued"` in the `create_bid` reply is a fixed word, not a live status.
 
 ### 8. Offer the customer page
 
