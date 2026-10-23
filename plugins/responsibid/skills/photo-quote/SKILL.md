@@ -95,7 +95,7 @@ Then one round with two questions, as a menu or a numbered list:
 1. **"Send the quote to <name>?"** It has two options:
    - "Send to <name>": its description says it saves the quote and starts the follow-up, and states what goes out, to whom and when, from step 3.
    - "Not yet": nothing is saved and nothing is sent. The user can ask to send it later, and you save it then with these answers.
-2. **"Build the customer quote page?"** The options are "Build the page" and "Not now". On "Build the page", build it with the `customer-quote-page` skill once the quote is saved. If the user chose "Not yet", say the page comes once the quote is sent.
+2. **"Build the customer quote page?"** The options are "Build the page" and "Not now". On "Build the page", build it with the `customer-quote-page` skill once the quote is saved. If the user chose "Not yet", say the page comes once the quote is sent, and offer it again after the send (step 7).
 
 ### 7. Save and send (only on "Send to <name>")
 
@@ -109,6 +109,8 @@ Then call `get_proposal` for the saved prices, and confirm:
 - **Sent: quote #id for <name> is in Open**, with when the first email and text go out, and the customer's `proposalLink`.
 - Any saved price that differs from the price check: name the service and both prices.
 - Any service the account attached on its own. A company's auto-added services can join a new quote; don't present them as the user's choice.
+
+If the user answered "Not now" to the page in step 6, end with one more question: **"Build the customer quote page for <name>?"** with "Build the page" and "Done". The quote is saved now, so the page can link to it. On "Build the page", build it with the `customer-quote-page` skill; on "Done", stop.
 
 If `create_bid` fails with an unexpected error, retry once with the same `idempotency_key` and the same body; the same key can't create a second quote. If the retry fails too, say so and stop.
 
