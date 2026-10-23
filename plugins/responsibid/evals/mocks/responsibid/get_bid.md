@@ -1,0 +1,3 @@
+Bid #501 — Open (open), closing price $249.00, contact #1001, created 2026-10-20T15:00:00.000Z
+
+{"data":{"id":501,"status":"seq-open","closingPrice":249,"notes":"Photo counts: front 12 panes, left side 4, rear 8, right side 0 (24 in all). Screens: none (user). Grids: none (user). Hard water: no (user). Confirm on site: rear pane count.","bidName":null,"contactId":1001,"propertyId":2001,"followUpSequence":{"id":"seq-open","name":"Open","default":"open"},"proposalLink":"https://bids.responsibid.com/proposal/0123456789abcdef","createdAt":"2026-10-20T15:00:00.000Z","updatedAt":"2026-10-20T15:00:00.000Z"},"meta":{},"errors":[]}
