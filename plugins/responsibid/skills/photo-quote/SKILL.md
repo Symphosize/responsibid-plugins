@@ -105,8 +105,9 @@ Call `create_bid` with `start_follow_up: true`, one `idempotency_key`, the selec
 - every answer
 - what to confirm on site
 
-Then call `get_proposal` for the saved prices, and confirm:
-- **Sent: quote #id for <name> is in Open**, with when the first email and text go out, and the customer's `proposalLink`.
+Then call `get_proposal` for the saved prices, and confirm, before any other question:
+- **Sent: quote #id for <name> is in Open**, with when the first email and text go out.
+- Three links, each on its own line with a label: the customer's profile in ResponsiBid (`https://app.bids.responsibid.com/CustomerProfile/{contactGroupId}`), the quote in ResponsiBid (`https://app.bids.responsibid.com/CustomerProfile/{contactGroupId}/{bidId}`), and the customer's `proposalLink`. Take `contactGroupId` from the `create_bid` reply; it is not the `contactId`. The first two need a ResponsiBid sign-in.
 - Any saved price that differs from the price check: name the service and both prices.
 - Any service the account attached on its own. A company's auto-added services can join a new quote; don't present them as the user's choice.
 
