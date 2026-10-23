@@ -41,7 +41,7 @@ Sections, in order:
    - Leave off any service the user didn't choose, and list it in the company section. Show bundles as `get_proposal` lists them (name, price, savings) in their own block, outside the total.
 6. **Accept.** A "Review and accept your proposal" button linking to `proposalLink`, a "Copy link" button, and the link as text. The copy button uses the clipboard and falls back to selecting the text when the clipboard is blocked. Add: "Choices on this page are a preview. The customer picks and signs on the proposal."
 7. **"How this quote was built".** A collapsed `<details>` headed "For the company, not for the customer". Put in it only what this conversation or the quote notes can support:
-   - **The process:** the steps that happened, in order (photos sent, counts read, answers given, quote saved and read back, sent to the customer).
+   - **The process:** the steps that happened, in order (photos sent, counts read, answers given, prices checked, quote saved and sent to the customer, saved prices read back).
    - **Answers saved:** each answer with its source: photos, user, or account.
    - **Confirm on site:** what the user flagged or the photos couldn't settle.
    - **Price check against the saved quote:** a table, only if this conversation made a price check. Mark each row that differs.
