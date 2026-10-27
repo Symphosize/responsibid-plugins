@@ -1,0 +1,1 @@
+{"data":[{"id":11,"name":"1,500-2,500 sq ft","order":1,"type":"residential","maxSqFt":2500,"description":null},{"id":12,"name":"Small office","order":2,"type":"commercial","maxSqFt":null,"description":null}]}

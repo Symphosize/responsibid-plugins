@@ -11,7 +11,7 @@ Each tool's description explains its inputs and what the pricing terms mean. Thi
 
 ## Read first
 
-1. Get the `service_id` from `get_catalog`.
+1. Get the `service_id` from `list_catalog_services`.
 2. Call `get_service_pricing` and get every other ID from its reply.
 3. Before changing anything, point out `unpricedHouseSizeIds`, `orphanedHouseSizeIds`, and any `suffixUnreadable` sub-service.
 

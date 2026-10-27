@@ -9,7 +9,7 @@ description: Take a customer's request for a home-service quote (bid) through Re
 
 ## 1. Find the service and the customer
 
-1. Call `get_catalog` with `services` set to what the customer asked for. If a name doesn't match, ask which listed service they meant. `meta.availableServices` lists add-ons you can offer.
+1. Call `list_catalog_services`, `list_service_areas`, `list_lead_sources` and `list_house_sizes`. If what the customer asked for doesn't clearly match one service by name, ask which listed service they meant. The other listed services are add-ons you can offer.
 2. Call `find_contact_by_phone`. Call `create_contact` only if nothing matches.
 
 ## 2. Ask the service's questions
