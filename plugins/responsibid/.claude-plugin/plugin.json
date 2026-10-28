@@ -1,6 +1,6 @@
 {
   "name": "responsibid",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Create and price home-service quotes in ResponsiBid. Browse a company's service catalog, look up or add contacts by phone, build bids with property and service details, calculate pricing, and review or select proposal packages. You can also view and edit follow-up sequences and their steps.",
   "author": {
     "name": "Symphosize"
