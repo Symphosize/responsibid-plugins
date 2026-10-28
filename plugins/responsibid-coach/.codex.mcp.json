@@ -5,8 +5,7 @@
       "url": "https://api-connect.bids.responsibid.com/mcp",
       "oauth": {
         "clientId": "codex",
-        "callbackUrl": "http://127.0.0.1:29353/callback/v9Www2EoKsOh",
-        "callbackPort": 29353
+        "callbackUrl": "http://127.0.0.1:29353/callback/v9Www2EoKsOh"
       }
     }
   }
