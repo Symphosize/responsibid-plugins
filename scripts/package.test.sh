@@ -75,8 +75,8 @@ for s in quote-intake photo-quote customer-quote-page pricing-setup follow-up-re
   check "claude-skill-$s.zip" "$s/SKILL.md"
 done
 
-# Codex must sign in with its own client, never Claude's.
-unzip -p "$out/codex-responsibid.zip" .codex.mcp.json | jq -e '.mcpServers.responsibid.oauth.clientId == "codex"' >/dev/null \
+# Codex must sign in with its own client, never Claude's, and listen on the port its callbackUrl names.
+unzip -p "$out/codex-responsibid.zip" .codex.mcp.json | jq -e '.mcpServers.responsibid.oauth | .clientId == "codex" and .callbackPort == 29353' >/dev/null \
   || { echo "FAIL: codex zip does not use the codex client"; fail=1; }
 
 unzip -p "$out/claude-responsibid.zip" .mcp.json | jq -e '.mcpServers.responsibid.oauth.clientId == "claude"' >/dev/null \
