@@ -17,7 +17,7 @@ The `quote-intake` skill holds the rules for every quote: one `idempotency_key` 
 
 ## Straight line to the quote
 
-The user is waiting. Between their first message and the price table, make only these calls: one customer lookup, `get_catalog` and the follow-up read (the first time in a conversation only), the round of quick choices, and one `compute_pricing` call. Reuse the catalog and the follow-up for every later quote in the conversation.
+The user is waiting. Between their first message and the price table, make only these calls: one customer lookup, the catalog read (`list_catalog_services` and `list_house_sizes`) and the follow-up read (the first time in a conversation only), the round of quick choices, and one `compute_pricing` call. Reuse the catalog and the follow-up for every later quote in the conversation.
 
 ## Ground rules
 
@@ -58,7 +58,7 @@ Match each row to the account's own service names in the catalog. Interior servi
 
 ### 2. Load the catalog (first quote of the conversation only)
 
-Call `get_catalog` with `services` set to the requested service plus every exterior service a photo could trigger, so a later quote in the same conversation doesn't wait on another read. For a home, use only residential house sizes.
+Call `list_catalog_services` and `list_house_sizes`. Keep the requested service plus every exterior service a photo could trigger, so a later quote in the same conversation doesn't wait on another read. For a home, use only residential house sizes.
 
 ### 3. Read the follow-up (first quote of the conversation only)
 
