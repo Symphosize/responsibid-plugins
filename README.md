@@ -59,7 +59,7 @@ To test local changes, add a local checkout instead of the GitHub repo:
 
 Open this repo in Codex. It reads `.agents/plugins/marketplace.json`. Install `responsibid` or `responsibid-coach` from the plugin browser, then sign in to ResponsiBid when prompted. You can also install a plugin from its `codex-*.zip` on the [Releases](https://github.com/Symphosize/responsibid-plugins/releases) page.
 
-Codex signs in with the `codex` client and returns to `http://127.0.0.1:29353/callback/v9Www2EoKsOh`, so keep port 29353 free during login. The last part of that path is derived from the server URL, so a different server needs its own registered callback. To use one, add the server by hand with `codex mcp add` instead of using the plugin.
+Codex signs in with the `codex` client and returns to `http://127.0.0.1:<port>/callback/v9Www2EoKsOh` on a port Codex picks for that login. The last part of that path is derived from the server URL, so a different server needs its own registered callback. To use one, add the server by hand with `codex mcp add` instead of using the plugin.
 
 ### ChatGPT
 
@@ -88,7 +88,7 @@ Uploaded skills are private to your account. Team and Enterprise owners can shar
 |---|---|
 | URL | `https://api-connect.bids.responsibid.com/mcp` (production, the default). Override it with `RESPONSIBID_MCP_URL`. |
 | OAuth clients | Claude and claude.ai: `claude`. Codex: `codex`. ChatGPT: `chatgpt-v2`, whose secret is entered in ChatGPT and never committed. |
-| Allowed redirect URIs | `https://claude.ai/api/mcp/auth_callback` (claude.ai), `http://localhost:<any port>/callback` (Claude Code), `http://127.0.0.1:29353/callback/v9Www2EoKsOh` (Codex), `https://chatgpt.com/connector/oauth/Cg9ws4-JyVGV` (ChatGPT) |
+| Allowed redirect URIs | `https://claude.ai/api/mcp/auth_callback` (claude.ai), `http://localhost:<any port>/callback` (Claude Code), `http://127.0.0.1:<any port>/callback/v9Www2EoKsOh` (Codex), `https://chatgpt.com/connector/oauth/Cg9ws4-JyVGV` (ChatGPT) |
 
 The Claude Code config is in `plugins/responsibid/.mcp.json`; in Claude Code, only that plugin declares the server. The Codex config is in `plugins/*/.codex.mcp.json`, and the ChatGPT config is in `plugins/*/.chatgpt.mcp.json`.
 
