@@ -79,5 +79,8 @@ done
 unzip -p "$out/codex-responsibid.zip" .codex.mcp.json | jq -e '.mcpServers.responsibid.oauth.clientId == "codex"' >/dev/null \
   || { echo "FAIL: codex zip does not use the codex client"; fail=1; }
 
+unzip -p "$out/claude-responsibid.zip" .mcp.json | jq -e '.mcpServers.responsibid.oauth.clientId == "claude"' >/dev/null \
+  || { echo "FAIL: claude zip does not use the claude client"; fail=1; }
+
 [ "$fail" = 0 ] && echo "OK: all release zips look right"
 exit "$fail"

@@ -4,8 +4,7 @@
       "type": "http",
       "url": "${RESPONSIBID_MCP_URL:-https://api-connect.bids.responsibid.com/mcp}",
       "oauth": {
-        "clientId": "ec0efc64-4415-4758-b912-4f7cede1b9c1",
-        "callbackPort": 8976
+        "clientId": "claude"
       }
     }
   }

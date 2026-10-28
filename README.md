@@ -39,7 +39,7 @@ Plugin marketplace for Claude Code and Codex. It connects the assistant to the R
    /plugin install responsibid-coach@responsibid
    ```
 
-3. Run `/reload-plugins`, then `/mcp`. Choose the `responsibid` server and sign in. Your browser opens the ResponsiBid sign-in page. After you sign in, it returns to `http://localhost:8976/callback`, so keep port 8976 free during login.
+3. Run `/reload-plugins`, then `/mcp`. Choose the `responsibid` server and sign in. Your browser opens the ResponsiBid sign-in page. After you sign in, it returns to `http://localhost:<port>/callback` on a port Claude Code picks for that login.
 
 Updates: third-party marketplaces don't auto-update by default. Run `claude plugin update responsibid` (or `responsibid-coach`), then `/reload-plugins`.
 
@@ -75,7 +75,7 @@ Connector:
 
 1. Go to **Customize → Connectors → Add custom connector**. On Team and Enterprise plans, an owner does this under **Organization settings → Connectors**.
 2. Set the MCP server URL to `https://api-connect.bids.responsibid.com/mcp`.
-3. Under **OAuth client**, choose **Use your own OAuth client** and enter the client ID `ec0efc64-4415-4758-b912-4f7cede1b9c1`. Leave the secret empty.
+3. Under **OAuth client**, choose **Use your own OAuth client** and enter the client ID `claude`. Leave the secret empty.
 4. Save and sign in. ResponsiBid returns you to `https://claude.ai/api/mcp/auth_callback`. You can't change auth settings after adding the connector; remove it and add it again instead.
 
 Skills: download each `claude-skill-*.zip` from the [Releases](https://github.com/Symphosize/responsibid-plugins/releases) page and upload it in **Customize → Skills → + → Create skill → Upload a skill**.
@@ -87,8 +87,8 @@ Uploaded skills are private to your account. Team and Enterprise owners can shar
 | | Value |
 |---|---|
 | URL | `https://api-connect.bids.responsibid.com/mcp` (production, the default). Override it with `RESPONSIBID_MCP_URL`. |
-| OAuth clients | Claude and claude.ai: `ec0efc64-4415-4758-b912-4f7cede1b9c1`. Codex: `codex`. ChatGPT: `chatgpt-v2`, whose secret is entered in ChatGPT and never committed. |
-| Allowed redirect URIs | `https://claude.ai/api/mcp/auth_callback` (claude.ai), `http://localhost:8976/callback` (Claude Code), `http://127.0.0.1:29353/callback/v9Www2EoKsOh` (Codex), `https://chatgpt.com/connector/oauth/Cg9ws4-JyVGV` (ChatGPT) |
+| OAuth clients | Claude and claude.ai: `claude`. Codex: `codex`. ChatGPT: `chatgpt-v2`, whose secret is entered in ChatGPT and never committed. |
+| Allowed redirect URIs | `https://claude.ai/api/mcp/auth_callback` (claude.ai), `http://localhost:<any port>/callback` (Claude Code), `http://127.0.0.1:29353/callback/v9Www2EoKsOh` (Codex), `https://chatgpt.com/connector/oauth/Cg9ws4-JyVGV` (ChatGPT) |
 
 The Claude Code config is in `plugins/responsibid/.mcp.json`; in Claude Code, only that plugin declares the server. The Codex config is in `plugins/*/.codex.mcp.json`, and the ChatGPT config is in `plugins/*/.chatgpt.mcp.json`.
 
