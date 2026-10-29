@@ -1,11 +1,11 @@
 ---
 name: pricing-setup
-description: Help a ResponsiBid company set up or change its pricing - house sizes, house-size prices, option prices, packages, and bundle auto-add. Use when a support person or coach is configuring a company's prices.
+description: Help a ResponsiBid company set up or change its pricing - house sizes, house-size prices, option prices, per-sq-ft measurement rates, packages, and bundle auto-add. Use when an admin, support person, or coach is configuring a company's prices.
 ---
 
 # Pricing setup
 
-If `get_service_pricing` and the other tools below aren't available, this login has no access to pricing setup. Say so, explain that a coach or support login is needed, and stop. Don't describe the change as if it were made.
+If `get_service_pricing` and the other tools below aren't available, this connection wasn't given pricing access. Say so, tell the user to reconnect ResponsiBid and approve the pricing permissions or ask ResponsiBid support, and stop. Don't describe the change as if it were made.
 
 Each tool's description explains its inputs and what the pricing terms mean. This skill sets the order and the approval rules.
 
@@ -22,6 +22,7 @@ Each tool's description explains its inputs and what the pricing terms mean. Thi
 | Add, rename, reorder, or remove house sizes | `manage_house_sizes`. A new size quotes $0 until you set its prices with `set_house_size_prices`. |
 | Prices per house size | `set_house_size_prices` |
 | Price of one answer | `set_option_price` |
+| Rate per measured sq ft (a question whose `pricing` is `rate`) | `set_measurement_rate` |
 | Packages | `set_packages`. Re-read the service right before saving, because name, enabled, and hourly rate overwrite whatever is stored. |
 | Bundle auto-add | `set_bundle_auto_add` |
 
