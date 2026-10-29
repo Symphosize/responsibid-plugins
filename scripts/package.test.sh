@@ -67,7 +67,8 @@ check claude-responsibid.zip .mcp.json
 check claude-responsibid.zip skills/quote-intake/SKILL.md
 check claude-responsibid.zip skills/photo-quote/SKILL.md
 check claude-responsibid.zip skills/customer-quote-page/SKILL.md
-check codex-responsibid-coach.zip skills/pricing-setup/SKILL.md
+check codex-responsibid.zip skills/pricing-setup/SKILL.md
+check codex-responsibid-coach.zip skills/company-onboarding/SKILL.md
 check codex-responsibid.zip skills/photo-quote/SKILL.md
 check chatgpt-responsibid.zip skills/customer-quote-page/SKILL.md
 
