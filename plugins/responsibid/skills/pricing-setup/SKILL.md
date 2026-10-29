@@ -12,7 +12,7 @@ Each tool's description explains its inputs and what the pricing terms mean. Thi
 ## Read first
 
 1. Get the `service_id` from `list_catalog_services`.
-2. Call `get_service_pricing` and get every other ID from its reply.
+2. Call `get_service_pricing` and get every other ID from its reply. Each question's `pricing` says where its price lives. When several services need reading, read them one at a time.
 3. Before changing anything, point out `unpricedHouseSizeIds`, `orphanedHouseSizeIds`, and any `suffixUnreadable` sub-service.
 
 ## Pick the tool
@@ -20,11 +20,13 @@ Each tool's description explains its inputs and what the pricing terms mean. Thi
 | Change | Tool |
 |---|---|
 | Add, rename, reorder, or remove house sizes | `manage_house_sizes`. A new size quotes $0 until you set its prices with `set_house_size_prices`. |
-| Prices per house size | `set_house_size_prices` |
-| Price of one answer | `set_option_price` |
-| Rate per measured sq ft (a question whose `pricing` is `rate`) | `set_measurement_rate` |
+| Prices per house size (a question whose `pricing` is `band` or `access`) | `set_house_size_prices` |
+| Price of one answer (a question whose `pricing` is `options`) | `set_option_price`. Answers of other questions carry no price. |
+| Rate per measured sq ft (a question whose `pricing` is `rate`) | `set_measurement_rate`. The rate is on the question, not its answers. Use `side: "mirrored"` for the mirrored side. |
 | Packages | `set_packages`. Re-read the service right before saving, because name, enabled, and hourly rate overwrite whatever is stored. |
 | Bundle auto-add | `set_bundle_auto_add` |
+
+Prices in hours or minutes need the package's hourly rate. If the package has none, set it with `set_packages` first; the price tools refuse otherwise.
 
 ## Preview, approve, apply
 

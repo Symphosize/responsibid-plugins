@@ -7,7 +7,7 @@ description: Walk a coach through setting up a newly signed ResponsiBid company 
 
 Set the company up in this order. Each step depends on the one before it.
 
-1. **Read what exists.** Call `list_catalog_services` and `list_house_sizes`, then `get_service_pricing` for each service. Summarize what's already set and what's missing before you suggest any change.
+1. **Read what exists.** Call `list_catalog_services` and `list_house_sizes`, then `get_service_pricing` for each service, one service at a time. Summarize what's already set and what's missing before you suggest any change.
 2. **House sizes.** Every price per house size depends on these.
 3. **Prices per house size, then option prices and measurement rates.**
 4. **Packages:** names, which are enabled, hourly rate, and "price per" rules.
