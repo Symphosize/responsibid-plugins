@@ -27,7 +27,7 @@ chatgpt-responsibid-coach.zip
 chatgpt-responsibid.zip
 claude-responsibid-coach.zip
 claude-responsibid.zip
-claude-skill-company-onboarding.zip
+claude-skill-new-account-setup.zip
 claude-skill-customer-quote-page.zip
 claude-skill-follow-up-rewrite.zip
 claude-skill-photo-quote.zip
@@ -68,11 +68,11 @@ check claude-responsibid.zip skills/quote-intake/SKILL.md
 check claude-responsibid.zip skills/photo-quote/SKILL.md
 check claude-responsibid.zip skills/customer-quote-page/SKILL.md
 check codex-responsibid.zip skills/pricing-setup/SKILL.md
-check codex-responsibid-coach.zip skills/company-onboarding/SKILL.md
+check codex-responsibid-coach.zip skills/new-account-setup/SKILL.md
 check codex-responsibid.zip skills/photo-quote/SKILL.md
 check chatgpt-responsibid.zip skills/customer-quote-page/SKILL.md
 
-for s in quote-intake photo-quote customer-quote-page pricing-setup follow-up-rewrite company-onboarding; do
+for s in quote-intake photo-quote customer-quote-page pricing-setup follow-up-rewrite new-account-setup; do
   check "claude-skill-$s.zip" "$s/SKILL.md"
 done
 

@@ -1,0 +1,1 @@
+{"data":[{"id":11,"name":"1,500-2,500 sq ft","order":1,"type":"residential","maxSqFt":2500,"description":null},{"id":12,"name":"2,500-4,000 sq ft","order":2,"type":"residential","maxSqFt":4000,"description":null}]}

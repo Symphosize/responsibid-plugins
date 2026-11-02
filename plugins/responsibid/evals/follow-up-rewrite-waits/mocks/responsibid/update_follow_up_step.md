@@ -1,1 +1,1 @@
-{"id":"{{input.step_id}}","updated":true}
+{"preview":true,"preview_token":"tok-fup","changes":[{"step":"step-1","field":"body","from":"{Contact.FirstName}, your quote is ready: {Bid.ProposalLink}. Reply if you have questions. - {Company.Name}","to":"Hi {Contact.FirstName}, your quote from {Company.Name} is ready! View it here: {Bid.ProposalLink}. Questions? Just reply. - {Company.Name}"}],"warnings":["This will update messages already scheduled for customers."]}

@@ -25,6 +25,7 @@ Each tool's description explains its inputs and what the pricing terms mean. Thi
 | Rate per measured sq ft (a question whose `pricing` is `rate`) | `set_measurement_rate`. The rate is on the question, not its answers. Use `side: "mirrored"` for the mirrored side. |
 | Packages | `set_packages`. Re-read the service right before saving, because name, enabled, and hourly rate overwrite whatever is stored. |
 | Bundle auto-add | `set_bundle_auto_add` |
+| Turn a service on/off, set minimums, trip charge | `set_service_settings`. Preview first, then apply with the preview token. |
 
 Prices in hours or minutes need the package's hourly rate. If the package has none, set it with `set_packages` first; the price tools refuse otherwise.
 

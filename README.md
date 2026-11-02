@@ -5,11 +5,11 @@ Plugin marketplace for Claude Code and Codex. It connects the assistant to the R
 | Plugin | For | Skills |
 |---|---|---|
 | `responsibid` | Everyone | `quote-intake`, `photo-quote`, `customer-quote-page`, `pricing-setup`, `follow-up-rewrite` |
-| `responsibid-coach` | Support and coaches, for company onboarding | `company-onboarding` |
+| `responsibid-coach` | Support and coaches, for company onboarding | `new-account-setup` |
 
 `photo-quote` and `customer-quote-page` build on `quote-intake`, so install the three together. On claude.ai, upload all three skill zips. `photo-quote` shows prices from a price check that saves nothing, then saves the quote and starts the follow-up on one Send tap. It reads the company's follow-up sequence to say in one line what that tap will set off. If a login can't read follow-ups, it says so before sending.
 
-`responsibid` provides the ResponsiBid MCP server. `responsibid-coach` depends on it, so installing the coach plugin also installs `responsibid`, and both share one server and one sign-in. The server lists only the tools your login's scopes allow, so the pricing-setup and follow-up tools appear for any admin account, coaches included. `pricing-setup` and `follow-up-rewrite` live in `responsibid` so every admin has them; the coach plugin only adds `company-onboarding`, which runs them in onboarding order.
+`responsibid` provides the ResponsiBid MCP server. `responsibid-coach` depends on it, so installing the coach plugin also installs `responsibid`, and both share one server and one sign-in. The server lists only the tools your login's scopes allow, so the pricing-setup and follow-up tools appear for any admin account, coaches included. `pricing-setup` and `follow-up-rewrite` live in `responsibid` so every admin has them; the coach plugin only adds `new-account-setup`, which runs them in onboarding order.
 
 ## Skills
 
@@ -20,7 +20,7 @@ Plugin marketplace for Claude Code and Codex. It connects the assistant to the R
 | `customer-quote-page` | Build a one-file page for a saved quote: what the photos showed, packages with a running total, upsells, the customer's proposal link, links into ResponsiBid for staff, and a company-only "How this quote was built" section. | `get_proposal`, `get_bid` |
 | `pricing-setup` | Change house sizes, house-size prices, option prices, per-sq-ft measurement rates, packages, and bundle auto-add. Every write is previewed and needs the user's approval. | `list_catalog_services`, `list_house_sizes`, `get_service_pricing`, `manage_house_sizes`, `set_house_size_prices`, `set_option_price`, `set_measurement_rate`, `set_packages`, `set_bundle_auto_add`, `compute_pricing` |
 | `follow-up-rewrite` | Review and rewrite the automated emails and texts sent after a quote or job | `list_follow_up_sequences`, `get_follow_up_sequence`, `update_follow_up_step` |
-| `company-onboarding` | Take a newly signed company through setup in order: house sizes, prices, packages, bundles, then follow-ups. Coach plugin only. | Uses `pricing-setup` and `follow-up-rewrite` |
+| `new-account-setup` | Set up a newly signed company from its setup brief — turn on the right services, set prices, minimums, trip charge, service areas, then follow-ups. Coach plugin only. | Uses `pricing-setup`, `follow-up-rewrite`, `set_service_settings`, `add_service_areas` |
 
 ## Install
 
