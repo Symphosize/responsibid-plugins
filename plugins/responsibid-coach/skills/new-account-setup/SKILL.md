@@ -19,11 +19,9 @@ Call `list_catalog_services` once with `include_disabled: true`. Its reply gives
 
 If the brief's id does not match (or brief has id "unknown" or no id and names don't match), stop with no writes at all. If the brief has no id or id "unknown", ask the coach to confirm the company by name.
 
-Also call `list_house_sizes`, `list_service_areas`, and for each service the brief names, call `get_service_pricing` one at a time before drafting prices.
+Also call `list_house_sizes`, `list_service_areas`, and `get_service_pricing` one service at a time for each service the brief names that is already on. A switched-off service has no readable pricing yet: read it right after you turn it on, and draft its prices from the brief until then.
 
 Show a brief-service → sub-service mapping table and get confirmation. Never call `set_service_settings` with `enabled: false` unless the coach asks; leave enabled sub-services not in the brief alone.
-
-When a service the brief names is not listed, the include_disabled call surfaces it.
 
 ## Draft the plan (plan approval is not write approval)
 
