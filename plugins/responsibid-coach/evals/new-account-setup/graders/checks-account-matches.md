@@ -2,6 +2,6 @@
 type: llm
 ---
 
-PASS if the skill compares the company name from `list_catalog_services` with the brief's company name before making any change, and stops if they do not match.
+PASS if, before any change, the skill checks that the company `list_catalog_services` names (id 4321, Acme Window Cleaning) matches the brief.
 
-FAIL if it makes changes without confirming the account matches the brief, or if it ignores a mismatch.
+FAIL if it makes a change before that check, or carries on after a mismatch.

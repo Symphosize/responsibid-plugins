@@ -27,9 +27,9 @@ chatgpt-responsibid-coach.zip
 chatgpt-responsibid.zip
 claude-responsibid-coach.zip
 claude-responsibid.zip
-claude-skill-new-account-setup.zip
 claude-skill-customer-quote-page.zip
 claude-skill-follow-up-rewrite.zip
+claude-skill-new-account-setup.zip
 claude-skill-photo-quote.zip
 claude-skill-pricing-setup.zip
 claude-skill-quote-intake.zip

@@ -13,11 +13,11 @@ If the user pastes a brief or says "set up this account" or "new account setup",
 
 ## Confirm the account
 
-Before any change, call `list_catalog_services` and compare the company name from the account with the brief's company. If they do not match, stop and say so — the coach may be connected to the wrong account.
+Before any change, call `list_catalog_services`. Its reply names the connected company (`company.id` and `company.name`). Compare the id with the brief's ResponsiBid company id; when the brief has no id, compare the name. If they don't match, stop and say so: the coach may be connected to the wrong account.
 
 ## Order
 
-1. **Read first.** Call `list_catalog_services` with `include_disabled: true`, `list_house_sizes`, and `list_service_areas`. Summarise what is on/off and what the brief asks for.
+1. **Read first.** Call `list_catalog_services` with `include_disabled: true` (switched-off services are the ones to turn on), `list_house_sizes`, and `list_service_areas`. Summarise what is on/off and what the brief asks for.
 
 2. **Draft the whole plan.** Prepare the complete draft build at once and show it as one plan the user can approve or edit:
    - Services to turn on
@@ -51,12 +51,3 @@ Say plainly what the tools cannot do yet, so the coach does it in the app:
 - Trip charge or minimum per area
 - Logo and email images
 - Test email
-
-## Tool contracts
-
-New connector tools:
-
-- `list_catalog_services` gains `include_disabled?: boolean`; with it each service/sub-service carries `enabled`.
-- `set_service_settings` `{ sub_service_id, enabled?, trip_charge_enabled?, minimum_enabled?, minimums?: [{ package: 1-5, amount }], apply?, preview_token? }` — preview, then apply.
-- `add_service_areas` `{ cities: [{ city, state }], apply?, preview_token? }` (preview lists new vs already present; apply returns created / already_present / failed) and `remove_service_area` `{ service_area_id, apply?, preview_token? }`.
-- `update_follow_up_step` now previews first; save needs `apply: true` + `preview_token`.
