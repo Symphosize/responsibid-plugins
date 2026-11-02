@@ -10,12 +10,12 @@
     {
       "name": "responsibid",
       "source": "./plugins/responsibid",
-      "description": "Create and price home-service quotes in ResponsiBid. Browse a company's service catalog, look up or add contacts by phone, build bids with property and service details, calculate pricing, and review or select proposal packages. You can also view and edit follow-up sequences and their steps."
+      "description": "Create and price home-service quotes in ResponsiBid. Browse a company's service catalog, look up or add contacts by phone, build bids with property and service details, calculate pricing, and review or select proposal packages. Admins can also set up pricing (house sizes, option prices, packages, bundles) and rewrite follow-up sequences."
     },
     {
       "name": "responsibid-coach",
       "source": "./plugins/responsibid-coach",
-      "description": "For support staff and coaches: company onboarding setup - pricing and follow-up sequences."
+      "description": "For support staff and coaches: walk a newly signed company through onboarding setup, in order."
     }
   ]
 }

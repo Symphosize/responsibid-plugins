@@ -1,7 +1,7 @@
 {
   "name": "responsibid-coach",
   "version": "0.4.2",
-  "description": "For support staff and coaches: company onboarding setup - pricing (house sizes, option prices, packages, bundles) and follow-up sequences.",
+  "description": "For support staff and coaches: walk a newly signed company through onboarding setup, in order.",
   "author": {
     "name": "Symphosize"
   },

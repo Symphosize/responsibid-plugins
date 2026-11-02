@@ -19,7 +19,7 @@ Ask in plain language, one or two at a time. If the customer doesn't know an ans
 ## 3. Price it
 
 - **Price check only** ("how much would it be?"): call `compute_pricing`. Don't create a bid.
-- **A real quote:** call `create_bid` with one `idempotency_key`. Reuse the same key on any retry. Then call `get_proposal`.
+- **A real quote:** `create_bid` starts the customer's follow-up, so price it first. Call `compute_pricing`, show the user the prices, and wait for approval. Then call `create_bid` with one `idempotency_key`, reusing the same key on any retry, and call `get_proposal`.
 
 Read prices back exactly as `get_proposal` gives them. Never quote prices from `list_bids` or `get_bid`, because they are rounded.
 
