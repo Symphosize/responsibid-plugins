@@ -21,9 +21,8 @@ Use only the merge fields that sequence lists, copied exactly. Never put curly b
 
 ## 3. Approve and save
 
-1. Call `update_follow_up_step` without `apply`. It returns the preview.
-2. Show the old and new text side by side.
-3. Warn that saving also changes messages already scheduled for customers in this sequence.
-4. Wait for approval. Then call `update_follow_up_step` again with `apply: true` and the `preview_token`.
+Preview EACH changed step separately: call `update_follow_up_step` without `apply` for one step, show its preview (old vs new), get approval, then apply with THAT step's own `preview_token`. Repeat for every step. Do not show a combined side-by-side on top of the per-step previews.
+
+On PREVIEW_EXPIRED, preview again and get fresh approval before applying.
 
 If a call fails partway through, tell the user which steps were already saved.

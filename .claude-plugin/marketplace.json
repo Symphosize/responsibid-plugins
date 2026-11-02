@@ -15,7 +15,7 @@
     {
       "name": "responsibid-coach",
       "source": "./plugins/responsibid-coach",
-      "description": "For support staff and coaches: walk a newly signed company through onboarding setup, in order."
+      "description": "For support staff and coaches: set up a newly signed company from its Biz App brief — services, prices, minimums, areas, in order."
     }
   ]
 }

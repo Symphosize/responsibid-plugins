@@ -9,45 +9,66 @@ Set up a newly signed company from its setup brief. The brief comes from the Biz
 
 ## Input
 
-If the user pastes a brief or says "set up this account" or "new account setup", use it. If no brief is given, ask for the few facts needed (which services, prices) as short multiple-choice questions.
+If the user pastes a brief or says "set up this account" or "new account setup", use it. If no brief is given, ask for the few facts needed (which services, prices) as short plain questions with typed dollar amounts, not multiple choice.
 
-## Confirm the account
+If `set_service_settings` or `add_service_areas` aren't available, this connection has no setup access. Say so, tell the user to reconnect ResponsiBid and approve the setup permissions or ask ResponsiBid support, and stop. Don't describe the change as if it were made.
 
-Before any change, call `list_catalog_services`. Its reply names the connected company (`company.id` and `company.name`). Compare the id with the brief's ResponsiBid company id; when the brief has no id, compare the name. If they don't match, stop and say so: the coach may be connected to the wrong account.
+## Read and confirm the account
 
-## Order
+Call `list_catalog_services` once with `include_disabled: true`. Its reply gives the connected company (`company.id` and `company.name`) and all services (enabled and disabled). Tell the coach the connected company's id and name. Get an explicit "yes, that's the company" before any write.
 
-1. **Read first.** Call `list_catalog_services` with `include_disabled: true` (switched-off services are the ones to turn on), `list_house_sizes`, and `list_service_areas`. Summarise what is on/off and what the brief asks for.
+If the brief's id does not match (or brief has id "unknown" or no id and names don't match), stop with no writes at all. If the brief has no id or id "unknown", ask the coach to confirm the company by name.
 
-2. **Draft the whole plan.** Prepare the complete draft build at once and show it as one plan the user can approve or edit:
-   - Services to turn on
-   - Prices per service
-   - Minimums
-   - Trip charge
-   - Service areas
-   - What stays for homework
+Also call `list_house_sizes`, `list_service_areas`, and for each service the brief names, call `get_service_pricing` one at a time before drafting prices.
 
-   This is the "draft before the call" so the call is for confirming, not collecting.
+Show a brief-service → sub-service mapping table and get confirmation. Never call `set_service_settings` with `enabled: false` unless the coach asks; leave enabled sub-services not in the brief alone.
 
-3. **Apply in order.** Every write previews, shows before/after in dollars and package names, waits for approval, then applies with the preview token. Group approvals per service so the user approves one service's changes at a time.
+When a service the brief names is not listed, the include_disabled call surfaces it.
 
-   - Turn services on with `set_service_settings` (use `enabled: true`)
-   - House sizes with `manage_house_sizes` and `set_house_size_prices` (follow `pricing-setup`)
-   - Prices (follow `pricing-setup`)
-   - Minimums and trip charge with `set_service_settings` (use `minimums`, `trip_charge_enabled`, `minimum_enabled`)
-   - Service areas with `add_service_areas`, using the brief's ZIP/radius to propose nearby cities and asking the user to confirm the list
-   - Packages with `set_packages`
-   - Bundle auto-add with `set_bundle_auto_add`
-   - Follow-ups last (follow `follow-up-rewrite`)
+## Draft the plan (plan approval is not write approval)
 
-4. **Test a quote.** Call `compute_pricing` for the top service and show the price.
+Prepare the complete draft and show it as one plan the user can approve or edit. This plan approval only confirms the intent; every write still needs its own preview + approval.
 
-5. **Finish with homework.** List the open items from the brief plus anything skipped. Draft a short homework message the coach can send — the skill never sends it, never creates a bid, and never starts a follow-up.
+- Only plan what the brief states. If "Form: in progress", plan only stated items; if "not started", plan nothing priced. Everything missing goes to homework.
+- Never invent a price, size, minimum or city that isn't in the brief or confirmed by the coach.
+- Show the mapping table (confirmed).
+- For each service: show the one minimum from brief proposed for every enabled package, with minimum_enabled true.
+- Trip charge: the tool only turns it on/off; it cannot set a dollar amount. If brief specifies an amount, put "set the trip charge amount to $X in the app" on homework.
+- Service areas: any city list from ZIP+radius is a draft the coach must check (no tool converts it). Never >50 per call.
+- Follow-ups: read-only here — list sequences, show their wording, ask whether to change anything (then use follow-up-rewrite skill); otherwise add "review follow-up wording" to homework.
+- Packages come before prices/minimums: state count, which enabled, set hourly via set_packages after re-reading the service.
 
-## What the tools cannot do yet
+## Apply in order (every write is previewed, shown, approved, then applied)
 
-Say plainly what the tools cannot do yet, so the coach does it in the app:
+Every write tool call is previewed first (call without apply), the preview shown to the user in dollars and package names, approved, then applied with the preview_token. One approval message may cover several previews that were all shown.
+
+Apply a service's enable step (`set_service_settings` with enabled:true) before previewing its prices or minimums.
+
+On PREVIEW_EXPIRED or STORED_VALUE_CHANGED, re-preview and get fresh approval before applying.
+
+Order:
+1. Turn services on (set_service_settings enabled:true for brief's services)
+2. House sizes (manage_house_sizes, set_house_size_prices — follow pricing-setup)
+3. Packages (set_packages: count, enabled which, hourly rate; re-read service right before)
+4. Prices (set_house_size_prices etc — follow pricing-setup; after packages)
+5. Minimums + trip charge on/off (set_service_settings: one min per enabled package, minimum_enabled:true, show per-package table; trip_charge_enabled only — ask if unclear)
+6. Service areas (add_service_areas with confirmed cities <=50; after apply report created / already_present / failed counts; failures go to homework. Never call remove_service_area unless coach asks, and then preview it first.)
+7. Bundle auto-add (set_bundle_auto_add)
+8. Follow-ups: read-only (see above); if changing, follow follow-up-rewrite skill (preview each step separately, its own token, re-preview on expired)
+9. Test quote: call compute_pricing with an inline property (a ZIP inside a confirmed service area, a house size from the brief) and the top service's enabled sub-service. This is a price check only — never create a contact or a bid.
+
+If a write tool is missing, say so and stop; don't describe changes as made.
+
+## Finish with homework
+
+The final homework list and the draft message must always include the four things the tools cannot do:
 - Copy a service from the master template
 - Trip charge or minimum per area
 - Logo and email images
-- Test email
+- Send a test email
+
+Plus the brief's open items, anything skipped or failed, and "review follow-up wording" if not changed.
+
+The homework message goes to the company owner (the coach sends it). When the owner is running the skill themself, address them directly and give them the list instead.
+
+The skill never sends the message, never creates a bid, never starts a follow-up, never creates a contact.

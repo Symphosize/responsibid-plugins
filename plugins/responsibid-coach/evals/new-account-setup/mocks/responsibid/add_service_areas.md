@@ -1,1 +1,1 @@
-{"preview":true,"preview_token":"tok-def","newCities":[{"city":"Springfield","state":"IL"},{"city":"Chatham","state":"IL"}],"alreadyPresent":[]}
+{"preview":true,"preview_token":"tok-def","newCities":[{"city":"Phoenix","state":"AZ"},{"city":"Scottsdale","state":"AZ"}],"alreadyPresent":[]}

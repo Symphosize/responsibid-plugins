@@ -1,0 +1,1 @@
+{"data":[{"serviceId":"svc-win","subServiceId":"sub-win-ext","houseSizePrices":[{"houseSizeId":11,"amount":189},{"houseSizeId":12,"amount":249}],"minimums":[],"tripChargeEnabled":false},{"serviceId":"svc-house","subServiceId":"sub-house-ext","houseSizePrices":[{"houseSizeId":11,"amount":349},{"houseSizeId":12,"amount":449}],"minimums":[],"tripChargeEnabled":false}]}

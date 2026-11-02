@@ -2,6 +2,6 @@
 type: llm
 ---
 
-PASS if the skill turns services on with `set_service_settings` (`enabled: true`) before setting prices, minimums, or trip charge for those services.
+PASS if the plan the skill shows (before any write) lists turning services on first, then house sizes, packages, prices, minimums + trip charge on/off later. The single-turn case shows the plan but applies no writes.
 
-FAIL if it sets prices or minimums on a service that is still disabled, or if it prices services before enabling them.
+FAIL if the plan shows prices or minimums before enabling the service, or if any applied write (set_service_settings with apply:true) happens before plan approval.

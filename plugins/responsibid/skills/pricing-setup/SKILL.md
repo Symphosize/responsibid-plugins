@@ -11,9 +11,9 @@ Each tool's description explains its inputs and what the pricing terms mean. Thi
 
 ## Read first
 
-1. Get the `service_id` from `list_catalog_services`.
+1. Get the `service_id` from `list_catalog_services` (use `include_disabled: true` when a service the brief or user names is not listed).
 2. Call `get_service_pricing` and get every other ID from its reply. Each question's `pricing` says where its price lives. When several services need reading, read them one at a time.
-3. Before changing anything, point out `unpricedHouseSizeIds`, `orphanedHouseSizeIds`, and any `suffixUnreadable` sub-service.
+3. A service must be turned on with `set_service_settings` (enabled: true) before it can be priced. Before changing anything, point out `unpricedHouseSizeIds`, `orphanedHouseSizeIds`, and any `suffixUnreadable` sub-service.
 
 ## Pick the tool
 
