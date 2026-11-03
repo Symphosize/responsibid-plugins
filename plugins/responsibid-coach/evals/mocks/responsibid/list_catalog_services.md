@@ -1,1 +1,1 @@
-{"company":{"id":4321,"name":"Acme Window Cleaning"},"data":[{"id":"svc-win","name":"Window Cleaning","subServices":[{"id":"sub-win-ext","name":"Exterior Windows","enabled":true}]}]}
+{"company":{"id":4321},"data":[{"id":"svc-win","name":"Window Cleaning","subServices":[{"id":"sub-win-ext","name":"Exterior Windows","enabled":true}]}]}
