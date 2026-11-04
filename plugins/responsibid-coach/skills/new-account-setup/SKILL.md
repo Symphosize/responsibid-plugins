@@ -36,6 +36,7 @@ Prepare the complete draft and show it as one plan the user can approve or edit.
 - Show the mapping table (confirmed).
 - For each sub-service: the brief's one minimum for every enabled package, with `minimum_enabled: true`. A minimum has no effect on quotes while `minimum_enabled` is off.
 - Trip charge: the tool only turns it on or off; it cannot set a dollar amount. If the brief gives an amount, put "set the trip charge amount to $X in the app" on homework.
+- Read every service's Notes for a fee or minimum tied to a place (a town, county, ZIP or distance), such as "Jobs in Towns County incur a $25 fee". That is a trip charge or minimum per area, which the tools cannot set: show it to the coach, ask whether it replaces the company-wide trip charge, and put it on homework with the place and amount. Do this even when the brief says the trip charge was not answered.
 - Service areas: any city list from ZIP + radius is a draft the coach must check (no tool converts it). Never more than 50 per call.
 - Follow-ups are read-only in this skill. List the sequences, show their wording, and ask whether to change anything. If yes, use the follow-up-rewrite skill; if not, add "review follow-up wording" to homework.
 
@@ -65,6 +66,6 @@ The final homework list and the draft message must always include the four thing
 
 Plus the brief's open items, anything skipped or failed, and "review follow-up wording" if not changed.
 
-The homework message goes to the company owner (the coach sends it). When the owner is running the skill themself, address them directly and give them the list instead.
+The homework message goes to the company owner (the coach sends it). Address it to the brief's Contact by first name when there is one. When the owner is running the skill themself, address them directly and give them the list instead.
 
 The skill never sends the message, never creates a bid, never starts a follow-up, never creates a contact.
