@@ -21,8 +21,17 @@ Use only the merge fields that sequence lists, copied exactly. Never put curly b
 
 ## 3. Approve and save
 
-1. Show the old and new text side by side.
-2. Tell the user that saving also changes messages already scheduled for customers in this sequence.
-3. Wait for approval. Then call `update_follow_up_step` once per step, with only the fields that change.
+Saving a step also changes the messages already scheduled for customers who are in this sequence now. Tell the user that before they approve.
+
+If `update_follow_up_step` takes `apply` and `preview_token`, it previews first:
+
+1. Call it without `apply` for one step, with only the fields that change. Show its before and after, and its warnings.
+2. Wait for the user's approval of that preview, sent after they saw it.
+3. Call it again with `apply: true` and that step's own `previewToken` as `preview_token`. Repeat for each step.
+4. On `PREVIEW_EXPIRED` or `STORED_VALUE_CHANGED`, preview again and get a fresh approval.
+
+If the tool has no `apply` input, every call saves at once. Show the old and new text side by side, wait for approval, then call it once per step with only the fields that change.
+
+Either way, a reply with `preview: true` saved nothing. Show that preview and follow the steps above; never report a step as saved until a reply says `applied: true`.
 
 If a call fails partway through, tell the user which steps were already saved.
