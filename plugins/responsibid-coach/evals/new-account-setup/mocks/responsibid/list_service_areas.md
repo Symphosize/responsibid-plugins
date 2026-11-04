@@ -1,1 +1,0 @@
-{"data":[{"id":"sa-1","city":"Phoenix","state":"AZ","zip":"85004","radiusMiles":25}]}

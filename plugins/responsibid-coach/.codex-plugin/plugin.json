@@ -8,8 +8,8 @@
   "mcpServers": "./.codex.mcp.json",
   "interface": {
     "displayName": "ResponsiBid Coach",
-    "shortDescription": "For support staff and coaches: set up a newly signed company from its Biz App brief — services, prices, minimums, areas, in order.",
-    "longDescription": "For support staff and coaches: set up a newly signed company from its Biz App brief — services, prices, minimums, areas, in order.",
+    "shortDescription": "Set up a newly signed company",
+    "longDescription": "For support staff and coaches: set up a newly signed ResponsiBid company from its Biz App setup brief. It confirms the account, turns on the right services, and sets packages, prices, minimums, trip charge and service areas in order, previewing every change for approval. It ends with the homework list for the owner.",
     "developerName": "Symphosize",
     "category": "Productivity",
     "logo": "./assets/icon.png",

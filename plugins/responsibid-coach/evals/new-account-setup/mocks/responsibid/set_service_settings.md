@@ -1,1 +1,0 @@
-{"preview":true,"preview_token":"tok-abc","changes":[{"subService":"Exterior Windows","field":"enabled","from":false,"to":true},{"subService":"Exterior Windows","field":"minimums","from":[],"to":[{"package":1,"amount":150},{"package":2,"amount":200}]},{"subService":"Exterior Windows","field":"trip_charge_enabled","from":false,"to":true}],"warnings":[]}
