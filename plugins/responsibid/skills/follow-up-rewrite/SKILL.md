@@ -32,4 +32,6 @@ If `update_follow_up_step` takes `apply` and `preview_token`, it previews first:
 
 If the tool has no `apply` input, every call saves at once. Show the old and new text side by side, wait for approval, then call it once per step with only the fields that change.
 
+Either way, a reply with `preview: true` saved nothing. Show that preview and follow the steps above; never report a step as saved until a reply says `applied: true`.
+
 If a call fails partway through, tell the user which steps were already saved.

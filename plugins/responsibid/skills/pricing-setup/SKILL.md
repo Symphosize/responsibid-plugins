@@ -32,9 +32,9 @@ Prices in hours or minutes need the package's hourly rate. If the package has no
 
 ## Preview, approve, apply
 
-1. Call the tool without `apply`. A `noChange` reply means the values already match, so stop there.
+1. Call the tool without `apply`. A reply with `preview: true` saved nothing. A `noChange` reply means the values already match, so stop there.
 2. Show the user the before, the after, and the warnings, using dollars and package names (the preview's `context` has the names).
 3. Wait for approval. It must be a message the user sends after seeing this preview; an earlier "go ahead" on a plan does not count. One approval may cover several previews if all of them were shown before it.
 4. Then repeat the same call with `apply: true` and the `previewToken` the preview returned as `preview_token`.
 
-If the apply returns `STORED_VALUE_CHANGED` or `PREVIEW_EXPIRED`, preview again and get a fresh approval. When the change is saved, call `get_service_pricing` again to confirm it.
+Report a change as saved only when the reply says `applied: true`. If the apply returns `STORED_VALUE_CHANGED` or `PREVIEW_EXPIRED`, preview again and get a fresh approval. When the change is saved, call `get_service_pricing` again to confirm it.

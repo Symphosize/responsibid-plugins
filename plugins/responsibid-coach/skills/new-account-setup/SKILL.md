@@ -20,6 +20,7 @@ Call `list_catalog_services` once with `include_disabled: true`. Its reply gives
 Stop with no writes at all when:
 - the brief's id and `company.id` differ;
 - the reply has no `company.id`, or `list_catalog_services` has no `include_disabled` input. The connection is on an older ResponsiBid version: tell the coach to try again after the update;
+- `list_catalog_services` refuses `include_disabled` for lack of a permission. Tell the coach to reconnect ResponsiBid and approve the setup permissions;
 - the brief has no id, or id "unknown", and the coach has not checked the connected company id in ResponsiBid and said it is this customer.
 
 Also call `list_house_sizes` and `list_service_areas`, and call `get_service_pricing` one service at a time for each service the brief names that already has a sub-service on. A sub-service that is off has no readable pricing. Draft its prices from the brief now; read its pricing after it is turned on in step 1 below.
