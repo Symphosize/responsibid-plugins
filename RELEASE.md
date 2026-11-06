@@ -15,3 +15,7 @@ The `Release` workflow runs `scripts/package.test.sh`, then builds the zips and 
 
 To build them locally, run `scripts/package.sh dist v0.2.0`.
 
+
+## Release gates
+
+Version 0.5.0 waits for `Symphosize/responsibid-server#2726` to be deployed. The coach steps in `new-account-setup` (reconnect and choose the customer on the consent page, and the 8-hour coach connection) also wait for the `Symphosize/responsibid-server#2763` server changes to be deployed. Release 0.5.0 only after both are live.
