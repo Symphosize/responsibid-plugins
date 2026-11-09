@@ -23,15 +23,15 @@ Use only the merge fields that sequence lists, copied exactly. Never put curly b
 
 Saving a step also changes the messages already scheduled for customers who are in this sequence now. Tell the user that before they approve.
 
-If `update_follow_up_step` takes `apply` and `preview_token`, it previews first:
+Ask how the user wants to approve: one step at a time (the default), or all the steps together after seeing every one. Use one at a time unless they choose all together.
 
-1. Call it without `apply` for one step, with only the fields that change. Show its before and after, and its warnings.
-2. Wait for the user's approval of that preview, sent after they saw it.
-3. Call it again with `apply: true` and that step's own `previewToken` as `preview_token`. Repeat for each step.
-4. On `PREVIEW_EXPIRED` or `STORED_VALUE_CHANGED`, preview again and get a fresh approval.
+If `update_follow_up_step` takes `apply` and `preview_token`, it previews first, and the approval rules are in the pricing-setup skill:
 
-If the tool has no `apply` input, every call saves at once. Show the old and new text side by side, wait for approval, then call it once per step with only the fields that change.
+1. Call it without `apply` for one step, with only the fields that change. Show its before and after, and its warnings. A reply with `preview: true` saved nothing.
+2. One at a time: wait for the user's approval of that step, then call it again with `apply: true` and that step's own `previewToken` as `preview_token`, before previewing the next step. All together: preview every step first, show them all, and after one approval apply each step with its own `previewToken`.
+3. On `PREVIEW_EXPIRED` or `STORED_VALUE_CHANGED`, preview that step again and get a fresh approval. A preview lasts about 10 minutes, so for many steps all together, apply soon after the approval.
+4. On this path, report a step as saved only when its reply says `applied: true`.
 
-Either way, a reply with `preview: true` saved nothing. Show that preview and follow the steps above; never report a step as saved until a reply says `applied: true`.
+If the tool has no `apply` input, every call saves at once and there is no preview. Show the old and new text side by side for the steps being approved, and wait for the user's approval before making any call. Then call it once per approved step with only the fields that change. A successful reply means that step is saved; report it as saved.
 
 If a call fails partway through, tell the user which steps were already saved.

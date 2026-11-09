@@ -7,11 +7,13 @@ description: Help a ResponsiBid company set up or change its pricing - house siz
 
 If `get_service_pricing` and the other tools below aren't available, this connection wasn't given pricing access. Say so, tell the user to reconnect ResponsiBid and approve the pricing permissions or ask ResponsiBid support, and stop. Don't describe the change as if it were made.
 
+Turning a sub-service on or off, its trip charge, and its minimums need `set_service_settings`. If that tool isn't available, say those changes can't be made from this connection, put them on the user's to-do list, and never describe a sub-service as turned on.
+
 Each tool's description explains its inputs and what the pricing terms mean. This skill sets the order and the approval rules.
 
 ## Read first
 
-1. Get the `service_id` from `list_catalog_services`. A service whose sub-services are all switched off is listed only with `include_disabled: true`. If the tool has no `include_disabled` input, tell the user that service is switched off and must be turned on in the app first, and stop for that service.
+1. Get the `service_id` from `list_catalog_services`. A service whose sub-services are all switched off is listed only with `include_disabled: true`. If the tool has no `include_disabled` input and a service the user named isn't in the list, say it wasn't found: it may be switched off, or named differently. Show the closest names from the list and ask which one they mean. If it's switched off, it must be turned on in the app first; stop for that service.
 2. Call `get_service_pricing` and get every other ID from its reply. Each question's `pricing` says where its price lives. When several services need reading, read them one at a time.
 3. A switched-off sub-service has no readable pricing. Turning it on is a change like any other: preview `set_service_settings` with `enabled: true`, get approval, then apply, before reading its prices.
 4. Before changing anything, point out `unpricedHouseSizeIds`, `orphanedHouseSizeIds`, and any `suffixUnreadable` sub-service.
@@ -32,9 +34,11 @@ Prices in hours or minutes need the package's hourly rate. If the package has no
 
 ## Preview, approve, apply
 
+This is the one approval rule for every ResponsiBid change. Other skills point here instead of repeating it.
+
 1. Call the tool without `apply`. A reply with `preview: true` saved nothing. A `noChange` reply means the values already match, so stop there.
 2. Show the user the before, the after, and the warnings, using dollars and package names (the preview's `context` has the names).
-3. Wait for approval. It must be a message the user sends after seeing this preview; an earlier "go ahead" on a plan does not count. One approval may cover several previews if all of them were shown before it.
+3. Wait for approval. It must be a message the user sends after seeing this preview; an earlier "go ahead" on a plan does not count. One approval may cover several previews if all of them were shown before it. A skill may ask for one approval per preview instead; follow-up-rewrite does by default.
 4. Then repeat the same call with `apply: true` and the `previewToken` the preview returned as `preview_token`.
 
 Report a change as saved only when the reply says `applied: true`. If the apply returns `STORED_VALUE_CHANGED` or `PREVIEW_EXPIRED`, preview again and get a fresh approval. When the change is saved, call `get_service_pricing` again to confirm it.

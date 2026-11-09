@@ -11,7 +11,7 @@ Set up a newly signed company from its setup brief. The brief comes from the Biz
 
 If the user pastes a brief or says "set up this account" or "new account setup", use it. If no brief is given, ask for the few facts needed (which services, prices) as short plain questions with typed dollar amounts, not multiple choice.
 
-If `set_service_settings` or `add_service_areas` aren't available, this connection has no setup access. Say so, tell the user to reconnect ResponsiBid and approve the setup permissions or ask ResponsiBid support, and stop. Don't describe the change as if it were made.
+If `set_service_settings` or `add_service_areas` aren't available, this connection has no setup access. The same applies to any write tool a step below needs. Say so, tell the user to reconnect ResponsiBid and approve the setup permissions or ask ResponsiBid support, and stop. Don't describe the change as if it were made.
 
 ## Read and confirm the account
 
@@ -37,14 +37,14 @@ Prepare the complete draft and show it as one plan the user can approve or edit.
 - For each sub-service: the brief's one minimum for every enabled package, with `minimum_enabled: true`. A minimum has no effect on quotes while `minimum_enabled` is off.
 - Trip charge: the tool only turns it on or off; it cannot set a dollar amount. If the brief gives an amount, put "set the trip charge amount to $X in the app" on homework.
 - Read every service's Notes for a fee or minimum tied to a place (a town, county, ZIP or distance), such as "Jobs in Towns County incur a $25 fee". That is a trip charge or minimum per area, which the tools cannot set: show it to the coach, ask whether it replaces the company-wide trip charge, and put it on homework with the place and amount. Do this even when the brief says the trip charge was not answered.
-- Service areas: any city list from ZIP + radius is a draft the coach must check (no tool converts it). Never more than 50 per call.
+- Service areas: any city list from ZIP + radius is a draft the coach must check (no tool converts it). Send at most 50 cities per call. For more, split the list into batches of up to 50, each with its own preview and approval. Any city not added goes on homework.
 - Follow-ups are read-only in this skill. List the sequences, show their wording, and ask whether to change anything. If yes, use the follow-up-rewrite skill; if not, add "review follow-up wording" to homework.
 
 ## Apply in order
 
-Every write follows the preview, approve, apply rules in the pricing-setup skill. The approval must be a message the coach sends after seeing that preview; approving the plan does not count.
+Every write follows the preview, approve, apply rules in the pricing-setup skill.
 
-1. Turn on the brief's sub-services: `set_service_settings` with `sub_service_id` and `enabled: true`, one sub-service per call. Then read each service's pricing with `get_service_pricing`.
+1. Turn on the brief's sub-services: `set_service_settings` with `sub_service_id` and `enabled: true`, one sub-service per call. Then read each service's pricing with `get_service_pricing`. A sub-service that is on can be quoted at once, before its prices and minimum are set. Keep track of which are still unpriced; if setup stops before steps 2–5 finish for one, tell the coach and put "set prices and minimum for <sub-service>: it's on and can be quoted now" on homework.
 2. House sizes (pricing-setup).
 3. Packages (pricing-setup): count, which are on, hourly rate.
 4. Prices (pricing-setup), after packages.
@@ -52,9 +52,7 @@ Every write follows the preview, approve, apply rules in the pricing-setup skill
 6. Service areas: `add_service_areas` with the confirmed cities. After the apply, report the `created`, `already_present`, `failed` and `not_confirmed` cities. Check any `not_confirmed` city with `list_service_areas` before trying it again. Failures go to homework. Never call `remove_service_area` unless the coach asks.
 7. Bundle auto-add (pricing-setup).
 8. Follow-ups, only if the coach asked (follow-up-rewrite).
-9. Test quote: call `compute_pricing` with an inline property (a ZIP inside a confirmed service area, a house size from the brief) and the top service's enabled sub-service. This is a price check only.
-
-If a write tool is missing, say so and stop; don't describe changes as made.
+9. Test quote: call `compute_pricing` with an inline property (city and ZIP inside a confirmed service area, a house size from the brief, and the number of stories) and the top service's enabled sub-service. Ask the coach for the city or stories if the brief doesn't give them. This is a price check only.
 
 ## Finish with homework
 
@@ -64,7 +62,7 @@ The final homework list and the draft message must always include the four thing
 - Logo and email images
 - Send a test email
 
-Plus the brief's open items, anything skipped or failed, and "review follow-up wording" if not changed.
+Plus the brief's open items, anything skipped or failed, any sub-service left on without prices or a minimum, and "review follow-up wording" if not changed.
 
 The homework message goes to the company owner (the coach sends it). Address it to the brief's Contact by first name when there is one. When the owner is running the skill themself, address them directly and give them the list instead.
 
