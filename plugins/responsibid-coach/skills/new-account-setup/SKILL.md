@@ -13,12 +13,16 @@ If the user pastes a brief or says "set up this account" or "new account setup",
 
 If `set_service_settings` or `add_service_areas` aren't available, this connection has no setup access. The same applies to any write tool a step below needs. Say so, tell the user to reconnect ResponsiBid and approve the setup permissions or ask ResponsiBid support, and stop. Don't describe the change as if it were made.
 
+## Coach connection
+
+A coach connection reaches one customer, lasts 8 hours, is limited to setup permissions, and replaces the coach's normal connection in that app. When it ends, ask the coach to reconnect.
+
 ## Read and confirm the account
 
 Call `list_catalog_services` once with `include_disabled: true`. Its reply gives the connected company's ResponsiBid company id (`company.id`) and every sub-service, switched on or off. Tell the coach the connected company id and the brief's company name. Get an explicit "yes, that's the company" before any write.
 
 Stop with no writes at all when:
-- the brief's id and `company.id` differ;
+- the brief's id and `company.id` differ. Tell the coach to reconnect ResponsiBid and, on the consent page, choose "a customer's company" and pick the customer named in the brief, then start again;
 - the reply has no `company.id`, or `list_catalog_services` has no `include_disabled` input. The connection is on an older ResponsiBid version: tell the coach to try again after the update;
 - `list_catalog_services` refuses `include_disabled` for lack of a permission. Tell the coach to reconnect ResponsiBid and approve the setup permissions;
 - the brief has no id, or id "unknown", and the coach has not checked the connected company id in ResponsiBid and said it is this customer.
