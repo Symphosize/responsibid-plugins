@@ -11,7 +11,7 @@ Set up a newly signed company from its setup brief. The brief comes from the Biz
 
 If the user pastes a brief or says "set up this account" or "new account setup", use it. If no brief is given, ask for the few facts needed (which services, prices) as short plain questions with typed dollar amounts, not multiple choice.
 
-If `set_service_settings` or `add_service_areas` aren't available, this connection has no setup access. The same applies to any write tool a step below needs. Say so, tell the user to reconnect ResponsiBid and approve the setup permissions or ask ResponsiBid support, and stop. Don't describe the change as if it were made.
+If `set_service_settings`, `add_service_areas` or any write tool a step below needs isn't available, setup can't run on this connection. Either ResponsiBid hasn't been updated yet, or the connection didn't approve the setup permissions. If `list_catalog_services` also has no `include_disabled` input, it's the older version: tell the coach to try again after the update. Otherwise tell the coach to reconnect ResponsiBid and approve the setup permissions, or ask ResponsiBid support. Stop either way, and don't describe any change as made.
 
 ## Coach connection
 
@@ -42,11 +42,16 @@ Prepare the complete draft and show it as one plan the user can approve or edit.
 - Trip charge: the tool only turns it on or off; it cannot set a dollar amount. If the brief gives an amount, put "set the trip charge amount to $X in the app" on homework.
 - Read every service's Notes for a fee or minimum tied to a place (a town, county, ZIP or distance), such as "Jobs in Towns County incur a $25 fee". That is a trip charge or minimum per area, which the tools cannot set: show it to the coach, ask whether it replaces the company-wide trip charge, and put it on homework with the place and amount. Do this even when the brief says the trip charge was not answered.
 - Service areas: any city list from ZIP + radius is a draft the coach must check (no tool converts it). Send at most 50 cities per call. For more, split the list into batches of up to 50, each with its own preview and approval. Any city not added goes on homework.
-- Follow-ups are read-only in this skill. List the sequences, show their wording, and ask whether to change anything. If yes, use the follow-up-rewrite skill; if not, add "review follow-up wording" to homework.
+- This skill doesn't change follow-ups itself. List the sequences, show their wording, and ask whether to change anything. If yes, use the follow-up-rewrite skill; if not, add "review follow-up wording" to homework.
 
 ## Apply in order
 
-Every write follows the preview, approve, apply rules in the pricing-setup skill.
+Every write follows the preview, approve, apply rules in the pricing-setup skill. In short: preview first by calling the write tool without `apply` and showing its reply (a description of the change is not a preview), and apply only after the coach approves in a message sent after seeing that preview (approving the plan does not count). Report a change as saved only when the reply says `applied: true`.
+
+This is a live customer account, and every change is live at once. To keep a change from landing in the wrong account:
+- Name the customer in every approval request, with the brief's company name and id, for example "Apply these to Crystal Clear Window Cleaning (#1234)?"
+- Right before the first write, call `list_catalog_services` again and check that `company.id` still matches the brief. Check again before the next write whenever the connection was renewed or switched, or a call failed for sign-in or permission. If it differs, stop with no further writes and tell the coach.
+- Keep a change log as you go: for each saved change, what changed, the old value and the new value. Show it to the coach at the end, or when setup stops early, so a wrong change can be put back by hand. It is for the coach, not the owner's homework message.
 
 1. Turn on the brief's sub-services: `set_service_settings` with `sub_service_id` and `enabled: true`, one sub-service per call. Then read each service's pricing with `get_service_pricing`. A sub-service that is on can be quoted at once, before its prices and minimum are set. Keep track of which are still unpriced; if setup stops before steps 2–5 finish for one, tell the coach and put "set prices and minimum for <sub-service>: it's on and can be quoted now" on homework.
 2. House sizes (pricing-setup).
