@@ -15,14 +15,18 @@ If `set_service_settings`, `add_service_areas` or any write tool a step below ne
 
 ## Coach connection
 
-A coach connection reaches one customer, lasts 8 hours, is limited to setup permissions, and replaces the coach's normal connection in that app. When it ends, ask the coach to reconnect.
+A coach connection reaches one customer at a time, lasts 8 hours from the first approval, is limited to setup permissions, and replaces the coach's normal connection in that app.
+
+- To move to another customer, call `find_customers` with the customer's name or id, then `switch_customer` with the chosen company id. It returns a preview naming the company; show it to the coach, and only after they say yes call it again with `apply: true` and the preview's `previewToken` as `preview_token`. The 8-hour end time does not change. After a switch, read and confirm the account again before any write.
+- When the coach says they are done, offer `end_coach_session`.
+- When the 8 hours end, ask the coach to reconnect.
 
 ## Read and confirm the account
 
 Call `list_catalog_services` once with `include_disabled: true`. Its reply gives the connected company's ResponsiBid company id (`company.id`) and every sub-service, switched on or off. Tell the coach the connected company id and the brief's company name. Get an explicit "yes, that's the company" before any write.
 
 Stop with no writes at all when:
-- the brief's id and `company.id` differ. Tell the coach to reconnect ResponsiBid and, on the consent page, choose "a customer's company" and pick the customer named in the brief, then start again;
+- the brief's id and `company.id` differ. If `switch_customer` is available, offer to switch to the customer named in the brief, as in Coach connection, then start again. Otherwise tell the coach to reconnect ResponsiBid and, on the consent page, choose "a customer's company" and pick the customer named in the brief, then start again;
 - the reply has no `company.id`, or `list_catalog_services` has no `include_disabled` input. The connection is on an older ResponsiBid version: tell the coach to try again after the update;
 - `list_catalog_services` refuses `include_disabled` for lack of a permission. Tell the coach to reconnect ResponsiBid and approve the setup permissions;
 - the brief has no id, or id "unknown", and the coach has not checked the connected company id in ResponsiBid and said it is this customer.
