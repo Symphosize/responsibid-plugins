@@ -1,0 +1,1 @@
+{"preview":true,"what":"2 house-size price cell(s) on question \"House size\" (f-size)","before":{"11":{"1":null},"12":{"1":null}},"after":{"11":{"1":"189"},"12":{"1":"249"}},"warnings":[],"previewToken":"mh3k2d.7c1e5a9b3d0f2e64","next":"Show this to the user. Call again with apply: true and this previewToken as preview_token only after they approve."}
