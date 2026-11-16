@@ -23,24 +23,20 @@ version=$(jq -r .version plugins/responsibid/.claude-plugin/plugin.json)
 scripts/package.sh "$out" "v$version" >/dev/null
 
 expected=$(cat <<EOF
-chatgpt-responsibid-coach.zip
 chatgpt-responsibid.zip
-claude-responsibid-coach.zip
 claude-responsibid.zip
 claude-skill-customer-quote-page.zip
 claude-skill-follow-up-rewrite.zip
-claude-skill-new-account-setup.zip
 claude-skill-photo-quote.zip
 claude-skill-pricing-setup.zip
 claude-skill-quote-intake.zip
-codex-responsibid-coach.zip
 codex-responsibid.zip
 EOF
 )
 actual=$(ls "$out" | sort)
 [ "$actual" = "$expected" ] || { echo "FAIL: zip list differs"; diff <(echo "$expected") <(echo "$actual") || true; fail=1; }
 
-for p in responsibid responsibid-coach; do
+for p in responsibid; do
   check "claude-$p.zip" .claude-plugin/plugin.json
   refuse "claude-$p.zip" '^(evals/|\.codex|plugin\.json$|mcp\.json$)'
   check "codex-$p.zip" .codex-plugin/plugin.json
@@ -68,11 +64,10 @@ check claude-responsibid.zip skills/quote-intake/SKILL.md
 check claude-responsibid.zip skills/photo-quote/SKILL.md
 check claude-responsibid.zip skills/customer-quote-page/SKILL.md
 check codex-responsibid.zip skills/pricing-setup/SKILL.md
-check codex-responsibid-coach.zip skills/new-account-setup/SKILL.md
 check codex-responsibid.zip skills/photo-quote/SKILL.md
 check chatgpt-responsibid.zip skills/customer-quote-page/SKILL.md
 
-for s in quote-intake photo-quote customer-quote-page pricing-setup follow-up-rewrite new-account-setup; do
+for s in quote-intake photo-quote customer-quote-page pricing-setup follow-up-rewrite; do
   check "claude-skill-$s.zip" "$s/SKILL.md"
 done
 
