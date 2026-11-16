@@ -43,8 +43,8 @@ run '1\nn\n' || true
 
 # Manifests that disagree are refused before anything changes.
 setup
-jq '.version="9.9.9"' "$tmp/repo/plugins/responsibid-coach/.codex-plugin/plugin.json" >"$tmp/m" \
-  && mv "$tmp/m" "$tmp/repo/plugins/responsibid-coach/.codex-plugin/plugin.json"
+jq '.version="9.9.9"' "$tmp/repo/plugins/responsibid/.codex-plugin/plugin.json" >"$tmp/m" \
+  && mv "$tmp/m" "$tmp/repo/plugins/responsibid/.codex-plugin/plugin.json"
 git -C "$tmp/repo" -c user.name=t -c user.email=t@t commit -qam drift
 git -C "$tmp/repo" push -q origin main
 if run '1\ny\n' || ! grep -q "versions disagree" "$tmp/out"; then echo "FAIL: mismatched manifests were not refused"; fail=1; fi
