@@ -1,6 +1,6 @@
 ---
 name: pricing-setup
-description: Help a ResponsiBid company set up or change its pricing - house sizes, house-size prices, option prices, per-sq-ft measurement rates, packages, and bundle auto-add. Use when an admin, support person, or coach is configuring a company's prices.
+description: Help a ResponsiBid company set up or change its pricing - house sizes, house-size prices, option prices, per-sq-ft measurement rates, packages, bundle auto-add, trip charges and minimums per service area, and upsells. Use when an admin, support person, or coach is configuring a company's prices.
 ---
 
 # Pricing setup
@@ -29,6 +29,11 @@ Each tool's description explains its inputs and what the pricing terms mean. Thi
 | Packages | `set_packages`. Re-read the service right before saving, because name, enabled, and hourly rate overwrite whatever is stored. |
 | Bundle auto-add | `set_bundle_auto_add` |
 | Turn a sub-service on or off, its trip charge on or off, minimums per package | `set_service_settings`. It works on one sub-service; a service has no switch of its own. |
+| Trip charge amount for a service area | `set_trip_charge` with the area id from `list_service_areas`. It is added only for sub-services whose trip charge is on. |
+| Minimum job price per package for a service area | `set_area_minimums`. It applies only to sub-services with `minimum_area_enabled` on (`set_service_settings`). |
+| Offer a sub-service as an upsell on every quote | `set_service_settings` with `upsell`: `price` with `upsell_prices` per package, `specification`, or `none`. A `specification` upsell is priced from answers saved in the app's upsell settings, which no tool sets. |
+
+If `set_trip_charge`, `set_area_minimums`, or the `upsell` input isn't available, this connection can't make that change (an older ResponsiBid version, or the permission wasn't approved): put it on the to-do list as a change to make in the app. When a preview warns that no enabled sub-service has the matching switch on, say the amount won't reach quotes until it is turned on, and offer to turn it on.
 
 Prices in hours or minutes need the package's hourly rate. If the package has none, set it with `set_packages` first; the price tools refuse otherwise.
 
